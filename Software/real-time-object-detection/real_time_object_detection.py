@@ -26,7 +26,7 @@ fps = FPS().start()
 def generate_frames():
 	while True:		
 		frame = vs.read()
-		frame = cv2.flip(frame, 1)
+		frame = cv2.flip(frame, 0)
 		frame = imutils.resize(frame, width=400)
 		
 		(h, w) = frame.shape[:2]

@@ -2,7 +2,7 @@
 #include <Servo.h>          //Servo motor library. This is standard library
 #include <NewPing.h>        //Ultrasonic sensor function library. You must install this library
 
-SoftwareSerial mySerial(12, 13); // RX, TX
+SoftwareSerial mySerial(13, 12); // RX, TX
 
 //our L298N control pins
 const int LeftMotorBackward = 2;
@@ -57,7 +57,7 @@ void loop()
   while (mySerial.available())
   {
     res = mySerial.read();
-    Serial.println(res);
+    Serial.print(res);
 
     if (res == 'A')
     {
@@ -95,7 +95,7 @@ void loop()
     }
     if (flag == 1)
     {
-      automode();   
+      //automode();   
     }
   }  
 }
