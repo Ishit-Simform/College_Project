@@ -25,46 +25,65 @@
       <div class="row">
         <div class="col-12 d-flex justify-content-center m-2">
           <div class="col-6 d-flex justify-content-center m-2">
-            <i id="front" onclick="func(this.id)" class="fa fa-arrow-up" style="font-size:100px;color:blue"></i>
+            <i id="front" onclick="send_command(this.id)" class="fa fa-arrow-up" style="font-size:100px;color:blue"></i>
           </div>
         </div>                        
         
         <div class="col-12 d-flex justify-content-center m-2">
           <div class="col-1 d-flex justify-content-center m-2">
-            <i id="left" onclick="func(this.id)" class="fa fa-arrow-left" style="font-size:100px;color:blue;"></i>            
+            <i id="left" onclick="send_command(this.id)" class="fa fa-arrow-left" style="font-size:100px;color:blue;"></i>            
           </div>
           <div class="col-1 d-flex justify-content-center m-2">
-            <i id="stop" onclick="func(this.id)" class="fa fa-stop-circle" style="font-size:100px;color:blue;"></i>
+            <i id="stop" onclick="send_command(this.id)" class="fa fa-stop-circle" style="font-size:100px;color:blue;"></i>
           </div>
           <div class="col-1 d-flex justify-content-center m-2">
-            <i id="right" onclick="func(this.id)" class="fa fa-arrow-right" style="font-size:100px;color:blue;"></i>
+            <i id="right" onclick="send_command(this.id)" class="fa fa-arrow-right" style="font-size:100px;color:blue;"></i>
           </div>
         </div>                        
 
         <div class="col-12 d-flex justify-content-center m-2">
           <div class="col-12 d-flex justify-content-center m-2">
-            <i id="back" onclick="func(this.id)" class="fa fa-arrow-down" style="font-size:80px;color:blue;"></i>
+            <i id="back" onclick="send_command(this.id)" class="fa fa-arrow-down" style="font-size:80px;color:blue;"></i>
           </div> 
         </div>                                          
       </div>            
   </div>
 </body>
-<script>
-  async function func(cmd) {
+<script>  
+  var gateway = 'ws://192.168.39.175/ws';
+  var websocket;
+  window.addEventListener('load', onLoad);
+  function initWebSocket() {
+    console.log('Trying to open a WebSocket connection...');
+    websocket = new WebSocket(gateway);
+    websocket.onopen    = onOpen;
+    websocket.onclose   = onClose;
+    //websocket.onmessage = onMessage; // <-- add this line
+  }
+  function onOpen(event) {
+    console.log('Connection opened');
+  }
+  function onClose(event) {
+    console.log('Connection closed');
+    setTimeout(initWebSocket, 2000);
+  }
+  // function onMessage(event) {
+  //   console.log('Message');    
+  // }
+  function onLoad(event) {
+    initWebSocket();   
+  }  
+  function send_command(cmd){
+    websocket.send(cmd);
+  }
+  
+  /*async function send_command(cmd) {    
     url = "http://192.168.186.215/";
     url = url + cmd;
     const response = await fetch(url);
     var data = await response.json();
     console.log(data);
-  }
-
-  async function send_command(cmd) {    
-    url = "http://192.168.186.215/";
-    url = url + cmd;
-    const response = await fetch(url);
-    var data = await response.json();
-    console.log(data);
-  }
+  }*/
 
   var flag = 0;
   document.addEventListener('keydown', function (e) {
