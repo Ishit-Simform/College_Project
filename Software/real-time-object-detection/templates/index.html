@@ -25,25 +25,25 @@
       <div class="row">
         <div class="col-12 d-flex justify-content-center m-2">
           <div class="col-6 d-flex justify-content-center m-2">
-            <i id="front" onclick="send_command(this.id)" class="fa fa-arrow-up" style="font-size:100px;color:blue"></i>
+            <i id="right" onclick="send_command(this.id)" class="fa fa-arrow-up" style="font-size:100px;color:blue"></i>
           </div>
         </div>                        
         
         <div class="col-12 d-flex justify-content-center m-2">
           <div class="col-1 d-flex justify-content-center m-2">
-            <i id="left" onclick="send_command(this.id)" class="fa fa-arrow-left" style="font-size:100px;color:blue;"></i>            
+            <i id="back" onclick="send_command(this.id)" class="fa fa-arrow-left" style="font-size:100px;color:blue;"></i>            
           </div>
           <div class="col-1 d-flex justify-content-center m-2">
             <i id="stop" onclick="send_command(this.id)" class="fa fa-stop-circle" style="font-size:100px;color:blue;"></i>
           </div>
           <div class="col-1 d-flex justify-content-center m-2">
-            <i id="right" onclick="send_command(this.id)" class="fa fa-arrow-right" style="font-size:100px;color:blue;"></i>
+            <i id="front" onclick="send_command(this.id)" class="fa fa-arrow-right" style="font-size:100px;color:blue;"></i>
           </div>
         </div>                        
 
         <div class="col-12 d-flex justify-content-center m-2">
           <div class="col-12 d-flex justify-content-center m-2">
-            <i id="back" onclick="send_command(this.id)" class="fa fa-arrow-down" style="font-size:80px;color:blue;"></i>
+            <i id="left" onclick="send_command(this.id)" class="fa fa-arrow-down" style="font-size:80px;color:blue;"></i>
           </div> 
         </div>                                          
       </div>            
@@ -89,19 +89,19 @@
   document.addEventListener('keydown', function (e) {
     if (e.key === 'ArrowUp' && flag == 0) {
       console.log("Forward");
-      send_command("front");
+      send_command("right");
       flag = 1;
     } else if (e.key === 'ArrowDown' && flag == 0) {
       console.log("Backward");
-      send_command("back");
+      send_command("left");
       flag = 1;
     } else if (e.key === 'ArrowLeft' && flag == 0) {
       console.log("Left");
-      send_command("left");
+      send_command("back");
       flag = 1;
     } else if (e.key === 'ArrowRight' && flag == 0) {
       console.log("Right");
-      send_command("right");
+      send_command("front");
       flag = 1;
     }
   });
